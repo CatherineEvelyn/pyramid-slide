@@ -4,7 +4,7 @@ var barValue = parseInt(bar.value);
 var yourSelect = document.getElementById("selectedBrick");
 var selected = parseInt(yourSelect.options[yourSelect.selectedIndex].value)
 
-renderPyramid(barValue, selected);
+//renderPyramid(barValue, selected);
 function renderPyramid(height, picNumber) {
 
     let selectedBrick = "";
@@ -32,8 +32,9 @@ function renderPyramid(height, picNumber) {
         a.appendChild(b);
         document.getElementById('pyramid').appendChild(a);
     }
-    
+
 }
+
 
 //changeSymbol();
 /*function changeSymbol() {
@@ -58,3 +59,17 @@ function renderPyramid(height, picNumber) {
     }
 }
 */
+
+var rng = document.getElementById("bar");
+var listener = function() {
+  window.requestAnimationFrame(function() {
+    renderPyramid(parseInt(rng.value), selected);
+  });
+};
+rng.addEventListener("mousedown", function() {
+  listener();
+  rng.addEventListener("mousemove", listener);
+});
+rng.addEventListener("mouseup", function() {
+  rng.removeEventListener("mousemove", listener);
+});
