@@ -1,47 +1,60 @@
+var bar = document.getElementById("bar");
+var barValue = parseInt(bar.value);
 
-/*
- * printPyramid
- *
- * Prints to the console a pyramid of '#' characters of the specified height
- * For example, if height is 5, the console will look like this:
- *          ##
- *         ###
- *        ####
- *       #####
- *      ######
- */
+var yourSelect = document.getElementById("selectedBrick");
+var selected = parseInt(yourSelect.options[yourSelect.selectedIndex].value)
 
-/*
-function drawPyramid(resp) {
+renderPyramid(barValue, selected);
+function renderPyramid(height, picNumber) {
 
-    function printPyramid(height) {
-        for (var row = 0; row < height; row++) {
-            string = "";
-            for (var i = 0; i < height - row - 1; i++) {
-                string += " "
+    let selectedBrick = "";
+    if (picNumber == 1) {
+        selectedBrick = "#";
+    } else if (picNumber == 2) {
+        selectedBrick = "@";
+    } else if (picNumber == 3) {
+        selectedBrick = "$";
+    } else {
+        selectedBrick = "X";
+    }
+
+    for (let row = 0; row < height; row++) {
+        string = "";
+        for (let i = 0; i < height - row - 1; i++) {
+            string += '\u00A0'
+        }
+        for (let x = 0; x < row + 2; x++) {
+            string += selectedBrick;
+        }
+        let a = document.createElement('p');
+        a.className='symbol';
+        let b = document.createTextNode(string);
+        a.appendChild(b);
+        document.getElementById('pyramid').appendChild(a);
+    }
+    
+}
+
+//changeSymbol();
+/*function changeSymbol() {
+
+    const x = document.getElementsByClassName('symb');
+    for (let row = 0; row < 5; row++) {
+        var testing = x[row];
+        var oldSymbol = testing.innerText;
+        var newSymbol = "";
+        for (xyz=0; xyz<6; xyz++) {
+            if (oldSymbol[xyz] == '#') {
+                newSymbol = newSymbol + '@';
+            } else {
+                newSymbol = newSymbol + '\u00A0';
             }
-            for (var x = 0; x < row + 2; x++) {
-            string += "#";
-            }
-            console.log(string);
-        };
-    };
+        }  
+        let a = document.createElement('p');
+        a.className='symb';
+        let b = document.createTextNode(newSymbol);
+        a.appendChild(b);
+        document.getElementById('pyramid').appendChild(a);
+    }
 }
 */
-
-printPyramid(5);
-function printPyramid(height) {
-        for (var row = 0; row < height; row++) {
-            string = "";
-            for (var i = 0; i < height - row - 1; i++) {
-                string += '\u00A0'
-            }
-            for (var x = 0; x < row + 2; x++) {
-                string += "#";
-            }
-            var a = document.createElement('p');
-            var b = document.createTextNode(string);
-            a.appendChild(b);
-            document.getElementById('pyramid').appendChild(a);
-        }
-}
