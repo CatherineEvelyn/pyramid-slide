@@ -1,12 +1,19 @@
-var bar = document.getElementById("bar");
-var barValue = parseInt(bar.value);
+//windows.onload = renderPyramid();
+
+//function mySize() {
+    var bar = document.getElementById("bar");
+    var barValue = parseInt(bar.value);
+//    return renderPyramid(barValue);
+//}
 
 var yourSelect = document.getElementById("selectedBrick");
 var selected = parseInt(yourSelect.options[yourSelect.selectedIndex].value)
 
+//selected.addEventListener('click', renderPyramid(barValue, selected));
+
 //renderPyramid(barValue, selected);
 function renderPyramid(height, picNumber) {
-
+    //to select the brick type of the pyramid
     let selectedBrick = "";
     if (picNumber == 1) {
         selectedBrick = "#";
@@ -18,6 +25,14 @@ function renderPyramid(height, picNumber) {
         selectedBrick = "X";
     }
 
+    //to clear the previous pyramid
+    let clearPyramid = document.getElementById('pyramid');
+    let p = pyramid.getElementsByClassName('symbol');
+    while (p[0]) {
+        p[0].parentNode.removeChild(p[0]);
+    }
+
+    //to render the pyramid to browser's screen
     for (let row = 0; row < height; row++) {
         string = "";
         for (let i = 0; i < height - row - 1; i++) {
@@ -60,6 +75,7 @@ function renderPyramid(height, picNumber) {
 }
 */
 
+//to make the slider dynamic
 var rng = document.getElementById("bar");
 var listener = function() {
   window.requestAnimationFrame(function() {
