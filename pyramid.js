@@ -1,37 +1,36 @@
-//windows.onload = renderPyramid();
+window.onload = mySize();
 
-//function mySize() {
+function mySize() {
     var bar = document.getElementById("bar");
     var barValue = parseInt(bar.value);
-//    return renderPyramid(barValue);
-//}
+    return renderPyramid(barValue);
+}
 
-var yourSelect = document.getElementById("selectedBrick");
-var selected = parseInt(yourSelect.options[yourSelect.selectedIndex].value)
-
-//selected.addEventListener('click', renderPyramid(barValue, selected));
+function myBrick() {
+    var yourSelect = document.getElementById("selectedBrick");
+    var selected = parseInt(yourSelect.options[yourSelect.selectedIndex].value);
+    //to select the brick type of the pyramid
+    var theBrick = "";
+    if (selected == 1) {
+        theBrick = "#";
+    } else if (selected == 2) {
+        theBrick = "@";
+    } else if (selected == 3) {
+        theBrick = "$";
+    } else {
+        theBrick = "X";
+    }
+    return theBrick;
+}
 
 //renderPyramid(barValue, selected);
-function renderPyramid(height, picNumber) {
-    //to select the brick type of the pyramid
-    let selectedBrick = "";
-    if (picNumber == 1) {
-        selectedBrick = "#";
-    } else if (picNumber == 2) {
-        selectedBrick = "@";
-    } else if (picNumber == 3) {
-        selectedBrick = "$";
-    } else {
-        selectedBrick = "X";
-    }
-
+function renderPyramid(height) {
     //to clear the previous pyramid
     let clearPyramid = document.getElementById('pyramid');
     let p = pyramid.getElementsByClassName('symbol');
-    while (p[0]) {
-        p[0].parentNode.removeChild(p[0]);
-    }
+    while (p[0]) {p[0].parentNode.removeChild(p[0]);}
 
+    let brick = myBrick();
     //to render the pyramid to browser's screen
     for (let row = 0; row < height; row++) {
         string = "";
@@ -39,7 +38,7 @@ function renderPyramid(height, picNumber) {
             string += '\u00A0'
         }
         for (let x = 0; x < row + 2; x++) {
-            string += selectedBrick;
+            string += brick;
         }
         let a = document.createElement('p');
         a.className='symbol';
@@ -47,9 +46,7 @@ function renderPyramid(height, picNumber) {
         a.appendChild(b);
         document.getElementById('pyramid').appendChild(a);
     }
-
 }
-
 
 //changeSymbol();
 /*function changeSymbol() {
@@ -75,11 +72,14 @@ function renderPyramid(height, picNumber) {
 }
 */
 
+var yourSelectA = document.getElementById("selectedBrick");
+var selectedA = parseInt(yourSelectA.options[yourSelectA.selectedIndex].value); console.log(selectedA)
+
 //to make the slider dynamic
 var rng = document.getElementById("bar");
 var listener = function() {
   window.requestAnimationFrame(function() {
-    renderPyramid(parseInt(rng.value), selected);
+    renderPyramid(parseInt(rng.value), selectedA);
   });
 };
 rng.addEventListener("mousedown", function() {
@@ -89,3 +89,6 @@ rng.addEventListener("mousedown", function() {
 rng.addEventListener("mouseup", function() {
   rng.removeEventListener("mousemove", listener);
 });
+
+
+yourSelectA.addEventListener('click', mySize);
